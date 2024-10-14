@@ -4,6 +4,7 @@ import OUTPUT_TYPES from './src/constants/output.mjs';
 import ERROR_MESSAGES from './src/constants/errors.mjs';
 import { parseArgs, parseCommandLine } from './src/handlers/cli.mjs';
 import handleNavigation from './src/navigation.mjs';
+import handleCompression from './src/compress.mjs';
 import { handleFS } from './src/fs.mjs';
 import { getHomeDir, handleOS } from './src/os.mjs';
 import handleHash from './src/hash.mjs';
@@ -54,6 +55,11 @@ import handleHash from './src/hash.mjs';
           await handleHash(path, cl).then((data) => {
             if (data) output(OUTPUT_TYPES.LOG, data);
           });
+          break;
+        }
+        case 'compress':
+        case 'decompress': {
+          await handleCompression(path, cl);
           break;
         }
         default: {
